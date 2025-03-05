@@ -1,0 +1,6 @@
+github_token    = "your-github-pat-token"
+github_owner    = "your-github-username-or-organization"
+repository_name = "your-repository-name"
+deploy_key      = "your-public-ssh-key"
+pat_value       = "your-pat-token-for-actions"
+discord_webhook = "your-discord-webhook-url"
