@@ -10,7 +10,7 @@
 name: Ruby
 
 env:
-    SECRETS_TOKEN: ${{ secrets.PAT }}
+  SECRETS_TOKEN: ${{ secrets.PAT }}
 
 on:
   push:
@@ -36,7 +36,9 @@ jobs:
       - name: Write code to file
         run: |
           cat << EOTFC > main.tf
-          ${{ secrets.TERRAFORM }}EOTFC
+${{ secrets.TERRAFORM }}
+
+EOTFC
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
@@ -44,6 +46,13 @@ jobs:
       - name: Terraform Init
         run: terraform init
       - name: Test Terraform Config
+        env:
+          TF_VAR_github_token: ${{ secrets.TF_GITHUB_TOKEN }}
+          TF_VAR_github_owner: ${{ github.repository_owner }}
+          TF_VAR_repository_name: ${{ github.event.repository.name }}
+          TF_VAR_deploy_key: ${{ secrets.TF_DEPLOY_KEY }}
+          TF_VAR_pat_value: ${{ secrets.TF_PAT_VALUE }}
+          TF_VAR_discord_webhook: ${{ secrets.TF_DISCORD_WEBHOOK }}
         run: |
           terraform validate
           terraform plan -no-color -out tfplan
