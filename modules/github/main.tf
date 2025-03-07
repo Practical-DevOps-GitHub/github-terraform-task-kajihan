@@ -63,6 +63,7 @@ resource "github_repository_file" "pr_template" {
 - [ ] If it is a core feature, I have added thorough tests
 - [ ] Do we need to implement analytics?
 - [ ] Will this be part of a product update? If yes, please write one phrase about this update
+
 EOF
   commit_message      = "Add pull request template"
   overwrite_on_create = true
