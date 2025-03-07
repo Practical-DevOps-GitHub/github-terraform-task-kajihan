@@ -52,6 +52,7 @@ jobs:
           TF_VAR_pat_value: ${{ secrets.TF_PAT_VALUE }}
           TF_VAR_discord_webhook: ${{ secrets.TF_DISCORD_WEBHOOK }}
         run: |
+          terraform init
           terraform validate
           terraform plan -no-color -out tfplan
           PLAN=$(terraform show -json tfplan)
